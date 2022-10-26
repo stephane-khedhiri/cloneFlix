@@ -8,16 +8,19 @@ export default  () => {
 
         dispatch(actionRequestingData())
 
-        MovieDb.trending(MEDIA_TYPE.MOVIE, TIME_WINDOW.DAY)
+        MovieDb.trending(MEDIA_TYPE.MOVIE, 'ghdgfhd')
             .then(datas => dispatch(actionReceivedDataMovie(datas.results)))
-            .catch(e => {
-                throw new Error(e.responseJSEON)
-            })
+            .catch(e =>{
+                e.responseJSON['action'] = 'actionReceivedDataMovie'
+                dispatch(actionAddError(e.responseJSON))
+                }
+            )
 
         MovieDb.trending(MEDIA_TYPE.TV, TIME_WINDOW.DAY)
             .then(datas => dispatch(actionReceivedDataTv(datas.results)))
             .catch(e => {
-                throw new Error(e.responseJSEON)
+                dispatch(actionAddError(e.responseJSON))
             })
     }
+
 }
