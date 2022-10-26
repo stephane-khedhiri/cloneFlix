@@ -12,7 +12,7 @@ const ErrorSlice = createSlice({
             return state
         },
         actionRestError(state){
-            state.status = false
+            state = {status: false}
             return state
         }
     }

@@ -4,20 +4,27 @@ const FilmSlice = createSlice({
     name: 'films',
     initialState: {
         fetching: false, //récupérer quelque chose
-        datas:[]
+        datas:{
+            movie: [],
+            tv: [],
+        }
     },
     reducers: {
         actionRequestingData: (state) => {
             state.fetching = true;
-            state.datas = []
-
+            state.datas.movie = []
+            state.datas.tv = []
         },
-        actionReceivedData: (state, datas) => {
+        actionReceivedDataMovie: (state, action) => {
             state.fetching = false;
-            state.datas = datas
+            state.datas.movie = action.payload
+        },
+        actionReceivedDataTv: (state, action) => {
+            state.fetching = false;
+            state.datas.tv = action.payload
         }
     }
 })
 
-export const { actionRequestingData, actionReceivedData } = FilmSlice.actions
+export const { actionRequestingData, actionReceivedDataMovie, actionReceivedDataTv } = FilmSlice.actions
 export default FilmSlice.reducer
