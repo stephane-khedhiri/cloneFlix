@@ -7,7 +7,6 @@ export default  () => {
     return (dispatch, getState) => {
 
         dispatch(actionRequestingData())
-
         MovieDb.trending(MEDIA_TYPE.MOVIE, TIME_WINDOW.DAY)
             .then(datas => dispatch(actionReceivedDataMovie(datas.results)))
             .catch(e =>{
